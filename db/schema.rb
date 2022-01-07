@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2022_01_07_155014) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_155014) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -48,8 +51,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_155014) do
 
   create_table "order_products", force: :cascade do |t|
     t.integer "quantity"
-    t.integer "order_id", null: false
-    t.integer "product_id", null: false
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_155014) do
     t.string "phone_number"
     t.float "total_value"
     t.integer "status", default: 0
-    t.integer "restaurant_id", null: false
+    t.bigint "restaurant_id", null: false
     t.string "city"
     t.string "street"
     t.string "neighborhood"
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_155014) do
 
   create_table "product_categories", force: :cascade do |t|
     t.string "title"
-    t.integer "restaurant_id", null: false
+    t.bigint "restaurant_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["restaurant_id"], name: "index_product_categories_on_restaurant_id"
@@ -84,7 +87,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_155014) do
     t.string "name"
     t.text "description"
     t.float "price"
-    t.integer "product_category_id", null: false
+    t.bigint "product_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
@@ -99,7 +102,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_155014) do
     t.string "neighborhood"
     t.string "number"
     t.string "complement"
-    t.integer "category_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_restaurants_on_category_id"
